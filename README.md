@@ -57,9 +57,9 @@ those numbers into the hotspot's `pitch`/`yaw` in `tour-config.js`.
 
 ## Deploying
 
-Plain static files - push to `main` and GitHub Pages serves it straight from
-the repo root, no build step. Once Pages is enabled (Settings > Pages >
-Deploy from a branch > `main` / `/ (root)`), the live URL is
+Plain static files - push to `master` and GitHub Pages serves it straight
+from the repo root, no build step. Once Pages is enabled (Settings > Pages >
+Deploy from a branch > `master` / `/ (root)`), the live URL is
 `https://funtionwebapp.github.io/bhh-virtual-tour/`. To embed on the real
 pub website, link to that URL or drop it in an `<iframe>`.
 
