@@ -44,14 +44,37 @@ Once a real photo is loaded, **hold Alt and click** anywhere in the tour -
 the pitch/yaw for that exact spot is logged to the browser console. Copy
 those numbers into the hotspot's `pitch`/`yaw` in `tour-config.js`.
 
+## Swapping in the real logo
+
+The loading screen currently shows a text wordmark ("Broken Hill Hotel")
+since there's no logo file yet. Once one exists: drop it in `img/logo.png`,
+then in `index.html` replace the `.tour-loading__wordmark` div with the
+commented-out `<img class="tour-loading__logo-img">` line right above it
+(same swap noted in the CSS). No other changes needed - the loading screen's
+background/colours/spinner all stay as they are.
+
+## Brand colours
+
+Real BHH palette (from the Function Pack), defined as CSS variables at the
+top of `css/tour.css` - change them there if the brand palette is ever
+updated, everything that uses them (loading screen, hotspot markers) follows:
+
+- `--bhh-green-darkest` `#3E4038`
+- `--bhh-green-dark` `#4B4D44`
+- `--bhh-green` `#5B5D53`
+- `--bhh-green-light` `#6D7064`
+- `--bhh-cream` `#F3E5AB`
+- `--bhh-white` `#FFFFFF`
+
 ## Status
 
 - [x] Base viewer + config structure
 - [x] 6 placeholder scenes, click-through navigation working
 - [x] Scene titles
-- [x] Autoload start scene + loading indicator
+- [x] Autoload start scene + branded loading/splash screen
 - [x] Info hotspots (separate from navigation hotspots)
 - [x] Mobile-responsive (tested iOS Safari viewport sizing, safe-area insets)
+- [ ] Real logo (currently a text wordmark)
 - [ ] Real photos in place of placeholders
 - [ ] Embedded into the main site
 

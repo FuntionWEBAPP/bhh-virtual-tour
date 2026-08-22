@@ -1,5 +1,15 @@
 /* Broken Hill Hotel - virtual tour styling. */
 
+:root {
+  /* Real BHH brand palette (from the client-facing Function Pack) */
+  --bhh-green-darkest: #3E4038;
+  --bhh-green-dark: #4B4D44;
+  --bhh-green: #5B5D53;
+  --bhh-green-light: #6D7064;
+  --bhh-cream: #F3E5AB;
+  --bhh-white: #FFFFFF;
+}
+
 html, body {
   margin: 0;
   padding: 0;
@@ -43,7 +53,7 @@ html, body {
 
 .tour-hotspot--nav .pnlm-sprite {
   background: rgba(20, 20, 20, 0.75);
-  border: 2px solid #f2c14e;
+  border: 2px solid var(--bhh-cream);
   border-radius: 50%;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.5);
 }
@@ -56,8 +66,8 @@ html, body {
   width: 14px;
   height: 14px;
   margin: -7px 0 0 -7px;
-  border-top: 3px solid #f2c14e;
-  border-right: 3px solid #f2c14e;
+  border-top: 3px solid var(--bhh-cream);
+  border-right: 3px solid var(--bhh-cream);
   transform: rotate(45deg);
   pointer-events: none;
 }
@@ -68,7 +78,7 @@ html, body {
   border-radius: 50%;
 }
 
-/* Loading indicator (custom, sits above Pannellum's own spinner) */
+/* Loading / splash screen - shown until the first panorama is ready */
 #tour-loading {
   position: fixed;
   inset: 0;
@@ -76,13 +86,17 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
-  background: #0b0b0b;
-  color: #f2c14e;
+  gap: 28px;
+  background:
+    radial-gradient(circle at 50% 42%, var(--bhh-green) 0%, var(--bhh-green-darkest) 72%);
+  color: var(--bhh-cream);
   font-family: Georgia, 'Times New Roman', serif;
   z-index: 20;
-  transition: opacity 0.4s ease;
+  transition: opacity 0.6s ease;
   opacity: 1;
+  padding: 24px;
+  box-sizing: border-box;
+  text-align: center;
 }
 
 #tour-loading.is-hidden {
@@ -90,24 +104,79 @@ html, body {
   pointer-events: none;
 }
 
+#tour-loading .tour-loading__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: tour-brand-in 1s ease both;
+}
+
+/* Text wordmark - swap for a real logo image once one exists:
+   <img src="img/logo.png" alt="Broken Hill Hotel" class="tour-loading__logo-img">
+   (drop the file in img/, replace .tour-loading__wordmark with the <img> above) */
+#tour-loading .tour-loading__wordmark {
+  font-size: clamp(28px, 7vw, 46px);
+  letter-spacing: 0.12em;
+  line-height: 1.3;
+  color: var(--bhh-white);
+  text-transform: uppercase;
+}
+
+#tour-loading .tour-loading__logo-img {
+  max-width: min(70vw, 260px);
+  max-height: 140px;
+  width: auto;
+  height: auto;
+}
+
+#tour-loading .tour-loading__rule {
+  width: 56px;
+  height: 1px;
+  margin: 14px 0;
+  background: var(--bhh-cream);
+  opacity: 0.85;
+}
+
+#tour-loading .tour-loading__tagline {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--bhh-cream);
+  opacity: 0.85;
+}
+
 #tour-loading .tour-loading__spinner {
-  width: 42px;
-  height: 42px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  border: 3px solid rgba(242, 193, 78, 0.25);
-  border-top-color: #f2c14e;
+  border: 3px solid rgba(243, 229, 171, 0.25);
+  border-top-color: var(--bhh-cream);
   animation: tour-spin 0.9s linear infinite;
 }
 
 #tour-loading .tour-loading__label {
-  font-size: 15px;
-  letter-spacing: 0.04em;
-  color: #eee;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--bhh-white);
+  opacity: 0.8;
 }
 
 @keyframes tour-spin {
   to {
     transform: rotate(360deg);
+  }
+}
+
+@keyframes tour-brand-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -122,6 +191,9 @@ html, body {
 /* Respect users who've asked for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   #tour-loading .tour-loading__spinner {
+    animation: none;
+  }
+  #tour-loading .tour-loading__brand {
     animation: none;
   }
 }
