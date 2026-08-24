@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <title>Virtual Tour - Broken Hill Hotel</title>
-<meta name="description" content="Take a 360-degree look around the Broken Hill Hotel - Garden Bar, Sports Bar, Restaurant, Side Bar, Side Terrace and more.">
+<meta name="description" content="Take a 360-degree look around the Broken Hill Hotel - Garden Bar, Back Bar, Restaurant, Side Bar, The Park and more. Planning a function? See the space before you enquire.">
 <meta name="theme-color" content="#3E4038">
 
 <link rel="stylesheet" href="vendor/pannellum/pannellum.css">
@@ -12,7 +12,68 @@
 </head>
 <body>
 
+<noscript>
+  <div class="tour-noscript">
+    <h1>Broken Hill Hotel - Virtual Tour</h1>
+    <p>This interactive 360&deg; tour needs JavaScript. In the meantime, here's
+       the layout: from the Front of Pub entrance, the Side Bar and Back Bar
+       are just inside; a rear foyer connects through to the Restaurant; and
+       The Park - a covered deck - runs from the street entrance around to
+       the Garden Bar (Two Mile Spring) courtyard downstairs.</p>
+    <p>For function enquiries, call <a href="tel:+61893611038">(08) 9361 1038</a>
+       or email <a href="mailto:manager@brokenhillhotel.com.au">manager@brokenhillhotel.com.au</a>.</p>
+  </div>
+</noscript>
+
 <div id="panorama"></div>
+
+<!-- Persistent chrome: survives every scene change, never disappears.
+     Hidden entirely in embed mode (?embed=1) - see tour.js. -->
+<header id="tour-header" class="tour-header">
+  <div class="tour-header__room">
+    <span id="tour-header__title" class="tour-header__title">&nbsp;</span>
+    <span id="tour-header__zone" class="tour-header__zone"></span>
+  </div>
+  <div class="tour-header__actions">
+    <button id="btn-facts" class="tour-header__btn" type="button" aria-label="Room details" title="Room details">i</button>
+    <button id="btn-map" class="tour-header__btn" type="button" aria-label="Map" title="Map">Map</button>
+    <a id="tour-header__cta" class="tour-header__cta" href="mailto:manager@brokenhillhotel.com.au">Enquire about a Function</a>
+  </div>
+</header>
+
+<!-- First-visit hint - dismisses on first drag/click, or after ~5s -->
+<div id="tour-hint" class="tour-hint" aria-hidden="true">
+  <div class="tour-hint__icon tour-hint__icon--drag">&#8596;</div>
+  <div class="tour-hint__text">Drag to look around</div>
+  <div class="tour-hint__divider"></div>
+  <div class="tour-hint__icon tour-hint__icon--tap">&#8599;</div>
+  <div class="tour-hint__text">Tap an arrow to move</div>
+</div>
+
+<!-- Space facts panel -->
+<div id="facts-panel" class="side-panel" hidden>
+  <div class="side-panel__card">
+    <button id="btn-facts-close" class="side-panel__close" type="button" aria-label="Close">&times;</button>
+    <h2 id="facts-title">&nbsp;</h2>
+    <p id="facts-zone" class="side-panel__zone"></p>
+    <p id="facts-capacity" class="side-panel__capacity" hidden></p>
+    <p id="facts-blurb"></p>
+    <a id="facts-cta" class="tour-header__cta" href="mailto:manager@brokenhillhotel.com.au">Enquire about this space</a>
+  </div>
+</div>
+
+<!-- Mini map: schematic, not to scale - see README -->
+<div id="map-panel" class="side-panel" hidden>
+  <div class="side-panel__card">
+    <button id="btn-map-close" class="side-panel__close" type="button" aria-label="Close">&times;</button>
+    <h2>Map</h2>
+    <p class="side-panel__hint">Schematic layout, not to scale - tap a room to jump there.</p>
+    <div id="map-diagram" class="map-diagram"></div>
+  </div>
+</div>
+
+<!-- Gallery thumbnail strip - alternative wayfinder, always available -->
+<nav id="gallery-strip" class="gallery-strip" aria-label="All rooms"></nav>
 
 <div id="tour-loading">
   <div class="tour-loading__brand">

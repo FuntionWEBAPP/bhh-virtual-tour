@@ -72,9 +72,20 @@
         canvas.height = h;
         canvas.getContext('2d').drawImage(img, 0, 0, w, h);
         canvas.toBlob(function (blob) {
+          if (!blob) { URL.revokeObjectURL(img.src); return reject(new Error('Could not encode photo')); }
+          // Tiny (28px wide) low-quality preview, embedded as a data URI in
+          // tour-scenes.json - the public tour shows this instantly, blurred
+          // by its own smallness when scaled up, while the real photo loads
+          // behind it (see tour.js's progressive-load handling).
+          var pW = 28;
+          var pH = Math.round(img.naturalHeight * (pW / img.naturalWidth));
+          var pCanvas = document.createElement('canvas');
+          pCanvas.width = pW;
+          pCanvas.height = pH;
+          pCanvas.getContext('2d').drawImage(img, 0, 0, pW, pH);
+          var preview = pCanvas.toDataURL('image/jpeg', 0.4);
           URL.revokeObjectURL(img.src);
-          if (!blob) return reject(new Error('Could not encode photo'));
-          resolve({ blob: blob, width: w, height: h, vaov: (360 * h) / w });
+          resolve({ blob: blob, width: w, height: h, vaov: (360 * h) / w, preview: preview });
         }, 'image/jpeg', JPEG_QUALITY);
       };
       img.onerror = function () {
@@ -227,6 +238,10 @@
     renderSceneList();
     var scene = tourData.scenes[index];
     el.titleInput.value = scene.title || '';
+    el.zoneInput.value = scene.zone || '';
+    el.seatedInput.value = (scene.capacity && scene.capacity.seated) || '';
+    el.cocktailInput.value = (scene.capacity && scene.capacity.cocktail) || '';
+    el.blurbInput.value = scene.blurb || '';
     loadEditorViewer(scene);
     renderWaypointList(scene);
   }
@@ -427,9 +442,13 @@
         var scene = {
           key: key,
           title: title,
+          zone: null,
           image: filename,
+          preview: result.preview,
           vaov: Math.round(result.vaov * 10) / 10,
           northOffset: 0,
+          capacity: null,
+          blurb: '',
           hotspots: []
         };
         tourData.scenes.push(scene);
@@ -458,12 +477,27 @@
     markDirty();
   }
 
+  function updateFacts() {
+    var scene = currentScene();
+    if (!scene) return;
+    scene.zone = el.zoneInput.value.trim() || null;
+    var seated = parseInt(el.seatedInput.value, 10);
+    var cocktail = parseInt(el.cocktailInput.value, 10);
+    scene.capacity = (seated || cocktail)
+      ? { seated: seated || null, cocktail: cocktail || null }
+      : null;
+    scene.blurb = el.blurbInput.value;
+    renderSceneList();
+    markDirty();
+  }
+
   function replacePhoto(file) {
     var scene = currentScene();
     if (!scene || !file) return;
     resizeImageToBlob(file).then(function (result) {
       return writeFile(dirHandle, IMAGE_DIR_PATH.concat(scene.image), result.blob).then(function () {
         scene.vaov = Math.round(result.vaov * 10) / 10;
+        scene.preview = result.preview;
         loadEditorViewer(scene);
         markDirty();
       });
@@ -548,6 +582,10 @@
       sceneList: document.getElementById('scene-list'),
       btnAddRoom: document.getElementById('btn-add-room'),
       titleInput: document.getElementById('scene-title-input'),
+      zoneInput: document.getElementById('scene-zone-input'),
+      seatedInput: document.getElementById('scene-seated-input'),
+      cocktailInput: document.getElementById('scene-cocktail-input'),
+      blurbInput: document.getElementById('scene-blurb-input'),
       btnReplacePhoto: document.getElementById('btn-replace-photo'),
       replacePhotoInput: document.getElementById('replace-photo-input'),
       btnSetStart: document.getElementById('btn-set-start'),
@@ -577,6 +615,10 @@
     el.btnSave.addEventListener('click', saveAll);
     el.btnAddRoom.addEventListener('click', openRoomModal);
     el.titleInput.addEventListener('change', renameScene);
+    el.zoneInput.addEventListener('change', updateFacts);
+    el.seatedInput.addEventListener('change', updateFacts);
+    el.cocktailInput.addEventListener('change', updateFacts);
+    el.blurbInput.addEventListener('change', updateFacts);
     el.btnReplacePhoto.addEventListener('click', function () { el.replacePhotoInput.click(); });
     el.replacePhotoInput.addEventListener('change', function () {
       replacePhoto(el.replacePhotoInput.files[0]);

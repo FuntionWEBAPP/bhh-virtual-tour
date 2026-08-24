@@ -1,128 +1,509 @@
 {
+  "venue": {
+    "name": "Broken Hill Hotel",
+    "address": "314 Albany Highway, Victoria Park WA 6100",
+    "phone": "(08) 9361 1038",
+    "functionsEnquiryUrl": "mailto:manager@brokenhillhotel.com.au"
+  },
   "startScene": "front-of-pub",
   "scenes": [
     {
       "key": "front-of-pub",
       "title": "Front of Pub",
+      "zone": null,
       "image": "front-of-pub.jpg",
       "vaov": 93.9,
       "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
       "hotspots": [
-        { "type": "scene", "target": "side-bar", "pitch": -2, "yaw": -162, "text": "Side Bar" },
-        { "type": "scene", "target": "the-park-junction", "pitch": -3, "yaw": 20, "text": "The Park" },
-        { "type": "info", "pitch": 6, "yaw": -90, "text": "Welcome to the Broken Hill Hotel" }
-      ]
+        {
+          "type": "scene",
+          "target": "side-bar",
+          "pitch": -2,
+          "yaw": -162,
+          "text": "Side Bar"
+        },
+        {
+          "type": "scene",
+          "target": "the-park-junction",
+          "pitch": -3,
+          "yaw": 20,
+          "text": "The Park"
+        },
+        {
+          "type": "info",
+          "pitch": 6,
+          "yaw": -90,
+          "text": "Welcome to the Broken Hill Hotel"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOdjd/tJOSCTkd8d6ENmld2chJaUKy7QzHPI98Um21oC03IjHHvITbJI3AJyOazi2zSSSHRRzRKVMuDnnGa0uZ2P/9k="
     },
     {
       "key": "side-bar",
       "title": "Side Bar",
+      "zone": "Zone 02",
       "image": "side-bar.jpg",
       "vaov": 83.3,
       "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
       "hotspots": [
-        { "type": "scene", "target": "front-of-pub", "pitch": -2, "yaw": 54, "text": "Front of Pub" },
-        { "type": "scene", "target": "back-bar", "pitch": -2, "yaw": -150, "text": "Back Bar" }
-      ]
-    },
-    {
-      "key": "the-park-junction",
-      "title": "The Park",
-      "image": "the-park-junction.jpg",
-      "vaov": 83.5,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "front-of-pub", "pitch": -2, "yaw": -144, "text": "Front of Pub" },
-        { "type": "scene", "target": "garden", "pitch": -6, "yaw": 130, "text": "Garden Bar (downstairs)" },
-        { "type": "scene", "target": "the-park-terrace", "pitch": -2, "yaw": 20, "text": "The Park (continued)" }
-      ]
-    },
-    {
-      "key": "garden",
-      "title": "Garden Bar (Two Mile Spring)",
-      "image": "garden.jpg",
-      "vaov": 83.8,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "the-park-junction", "pitch": 8, "yaw": -100, "text": "The Park (upstairs)" }
-      ]
-    },
-    {
-      "key": "the-park-terrace",
-      "title": "The Park - Terrace",
-      "image": "the-park-terrace.jpg",
-      "vaov": 93.2,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "the-park-junction", "pitch": -2, "yaw": -144, "text": "The Park" },
-        { "type": "scene", "target": "the-park-glass-door", "pitch": -2, "yaw": 60, "text": "The Park (continued)" }
-      ]
-    },
-    {
-      "key": "the-park-glass-door",
-      "title": "The Park - Restaurant Door",
-      "image": "the-park-glass-door.jpg",
-      "vaov": 84.7,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "the-park-terrace", "pitch": -2, "yaw": -144, "text": "The Park" },
-        { "type": "scene", "target": "restaurant", "pitch": -2, "yaw": 50, "text": "Restaurant" }
-      ]
-    },
-    {
-      "key": "restaurant",
-      "title": "Restaurant",
-      "image": "restaurant.jpg",
-      "vaov": 82.6,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "the-park-glass-door", "pitch": -2, "yaw": 80, "text": "The Park" },
-        { "type": "scene", "target": "hallway-restaurant", "pitch": -2, "yaw": -170, "text": "Entrance" },
-        { "type": "info", "pitch": 5, "yaw": 0, "text": "A la carte dining, open 7 days" }
-      ]
-    },
-    {
-      "key": "hallway-restaurant",
-      "title": "Restaurant Entrance",
-      "image": "hallway-restaurant.jpg",
-      "vaov": 83.4,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "restaurant", "pitch": -2, "yaw": 30, "text": "Restaurant" },
-        { "type": "scene", "target": "rear-foyer", "pitch": -2, "yaw": -160, "text": "Entrance" }
-      ]
-    },
-    {
-      "key": "rear-foyer",
-      "title": "Rear Foyer",
-      "image": "rear-foyer.jpg",
-      "vaov": 93.7,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "hallway-restaurant", "pitch": -2, "yaw": -122, "text": "Restaurant" },
-        { "type": "scene", "target": "back-entrance", "pitch": -2, "yaw": 144, "text": "Back Bar" }
-      ]
-    },
-    {
-      "key": "back-entrance",
-      "title": "Back Bar Entrance",
-      "image": "back-entrance.jpg",
-      "vaov": 81.3,
-      "northOffset": 0,
-      "hotspots": [
-        { "type": "scene", "target": "rear-foyer", "pitch": -2, "yaw": 150, "text": "Entrance" },
-        { "type": "scene", "target": "back-bar", "pitch": -2, "yaw": -20, "text": "Back Bar" }
-      ]
+        {
+          "type": "scene",
+          "target": "front-of-pub",
+          "pitch": -2,
+          "yaw": 54,
+          "text": "Front of Pub"
+        },
+        {
+          "type": "scene",
+          "target": "back-bar",
+          "pitch": -2,
+          "yaw": -150,
+          "text": "Back Bar"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKk909vD5rSNkDHA61GhWpVOpShd4RMjpQ7bFW0uMTUppJGbYgzyOuF4xxTvawrXJYr6YRgFYz74qW7u40raH//Z"
     },
     {
       "key": "back-bar",
       "title": "Back Bar",
+      "zone": "Zone 05",
       "image": "back-bar.jpg",
       "vaov": 85.6,
       "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
       "hotspots": [
-        { "type": "scene", "target": "back-entrance", "pitch": -2, "yaw": -11, "text": "Entrance" },
-        { "type": "scene", "target": "side-bar", "pitch": -2, "yaw": 160, "text": "Side Bar" }
-      ]
+        {
+          "type": "scene",
+          "target": "back-entrance",
+          "pitch": -2,
+          "yaw": -11,
+          "text": "Entrance"
+        },
+        {
+          "type": "scene",
+          "target": "side-bar",
+          "pitch": -2,
+          "yaw": 160,
+          "text": "Side Bar"
+        },
+        {
+          "type": "scene",
+          "target": "back-bar-2",
+          "pitch": -2,
+          "yaw": 90,
+          "text": "Back Bar (further in)"
+        },
+        {
+          "type": "scene",
+          "target": "back-bar-window",
+          "pitch": -2,
+          "yaw": -90,
+          "text": "Window Seating"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKhmEUTNIHJIBAGMCqp1bBKIyK6jTLoWzgkr/Kk563CxP9oZ4FcKXJbYM464zUyknoNKxHc3jxTFHCBgBkYzg/Ws0Uf/2Q=="
+    },
+    {
+      "key": "back-bar-2",
+      "title": "Back Bar - Further In",
+      "zone": "Zone 05",
+      "image": "back-bar-2.jpg",
+      "vaov": 85.5,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "back-bar",
+          "pitch": -2,
+          "yaw": -90,
+          "text": "Back Bar"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKi3O53IUgRjnpycgVKdtSh6XDtIRsByPlDdxTcot7BZj5WkCAywKo/D0PpUXHYrxy2h3eedhDYXCZyPWtObyIsf/9k="
+    },
+    {
+      "key": "back-bar-window",
+      "title": "Back Bar - Window Seating",
+      "zone": "Zone 05",
+      "image": "back-bar-window.jpg",
+      "vaov": 82.5,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "back-bar",
+          "pitch": -2,
+          "yaw": 90,
+          "text": "Back Bar"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKcN20aomzCkHHPvipcr7FWsSuDdxvEiFnyCF3Y4Gc8/lUc99GNxtqS26fZ9FlEi7TuJ659KTd2CKgv3cDCjCgLknripskaXZ//Z"
+    },
+    {
+      "key": "back-entrance",
+      "title": "Back Bar Entrance",
+      "zone": null,
+      "image": "back-entrance.jpg",
+      "vaov": 81.3,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "rear-foyer",
+          "pitch": -2,
+          "yaw": 150,
+          "text": "Entrance"
+        },
+        {
+          "type": "scene",
+          "target": "back-bar",
+          "pitch": -2,
+          "yaw": -20,
+          "text": "Back Bar"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AGWJM9lLcMFClGAXrg1hOXRFpEmnsjwMZEDM8pXms6kncqKIpgIrd0kZn8kb+OPb+tUpczE1YzJNQglbdLbFz0B344rTUk//2Q=="
+    },
+    {
+      "key": "rear-foyer",
+      "title": "Rear Foyer",
+      "zone": null,
+      "image": "rear-foyer.jpg",
+      "vaov": 93.7,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "hallway-restaurant",
+          "pitch": -2,
+          "yaw": -122,
+          "text": "Restaurant"
+        },
+        {
+          "type": "scene",
+          "target": "back-entrance",
+          "pitch": -2,
+          "yaw": 144,
+          "text": "Back Bar"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AJLby1sImdAS+QB+P/1q55N3NUiNEMLSRvtEcrELySRk8fTtVOV9ETylE3sEEot5fNkWN/mx1yD0+lVrbQRaa7hZ2LAgZwv0/wA5rSMo21QnGV9Gf//Z"
+    },
+    {
+      "key": "hallway-restaurant",
+      "title": "Restaurant Entrance",
+      "zone": null,
+      "image": "hallway-restaurant.jpg",
+      "vaov": 83.4,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "restaurant",
+          "pitch": -2,
+          "yaw": 30,
+          "text": "Restaurant"
+        },
+        {
+          "type": "scene",
+          "target": "rear-foyer",
+          "pitch": -2,
+          "yaw": -160,
+          "text": "Entrance"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AI7S4eb7QsyoQkZIGOKzZTILdgk0AKj51YEgdMKf8KXNe4OPLqaH2hIyVZNxD7SceoFCFYrqsb7id2QSKB3P/9k="
+    },
+    {
+      "key": "restaurant",
+      "title": "Restaurant",
+      "zone": "Zone 03",
+      "image": "restaurant.jpg",
+      "vaov": 82.6,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "the-park-glass-door",
+          "pitch": -2,
+          "yaw": 80,
+          "text": "The Park"
+        },
+        {
+          "type": "scene",
+          "target": "hallway-restaurant",
+          "pitch": -2,
+          "yaw": -170,
+          "text": "Entrance"
+        },
+        {
+          "type": "scene",
+          "target": "restaurant-2",
+          "pitch": -2,
+          "yaw": 130,
+          "text": "Restaurant (more seating)"
+        },
+        {
+          "type": "info",
+          "pitch": 5,
+          "yaw": 0,
+          "text": "A la carte dining, open 7 days"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AIY7iSNYfJ2rtTHOcdTWbZcY3GI8k7h5Qjbhu/Kk5WK5OYV4WmtyTgiRd4yTx3rXm0MuWzKEP8YCJw5HIzSZR//Z"
+    },
+    {
+      "key": "restaurant-2",
+      "title": "Restaurant - More Seating",
+      "zone": "Zone 03",
+      "image": "restaurant-2.jpg",
+      "vaov": 82.5,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "restaurant",
+          "pitch": -2,
+          "yaw": -50,
+          "text": "Restaurant"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AKTTzXB2OEIUDt61nzWNeUeY/lcgAKrGPaGOMgfyq4z0MpQszLjeNHdTGD93GRnB60Mpamis8aFsQR4JzyPaoUinBn//2Q=="
+    },
+    {
+      "key": "the-park-junction",
+      "title": "The Park",
+      "zone": null,
+      "image": "the-park-junction.jpg",
+      "vaov": 83.5,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "front-of-pub",
+          "pitch": -2,
+          "yaw": -144,
+          "text": "Front of Pub"
+        },
+        {
+          "type": "scene",
+          "target": "garden-deck-top",
+          "pitch": -6,
+          "yaw": 130,
+          "text": "Garden Bar (downstairs)"
+        },
+        {
+          "type": "scene",
+          "target": "the-park-deck-2",
+          "pitch": -2,
+          "yaw": 20,
+          "text": "The Park (continued)"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOTMw42xqpHU880hlq3uQsQjMasp68c/gaTBFdn2ush+6SeB7U0BML0NktHyT2oEf//Z"
+    },
+    {
+      "key": "the-park-deck-2",
+      "title": "The Park - Deck",
+      "zone": null,
+      "image": "the-park-deck-2.jpg",
+      "vaov": 93.2,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "the-park-junction",
+          "pitch": -2,
+          "yaw": -144,
+          "text": "The Park"
+        },
+        {
+          "type": "scene",
+          "target": "the-park-terrace",
+          "pitch": -2,
+          "yaw": 40,
+          "text": "The Park (continued)"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOfurgyy/vFXPTgcVC1LH2KRHKmIMS4UE0MSRCl35TNsXAPBoaAcdSdQAmcY70uUfMf/2Q=="
+    },
+    {
+      "key": "the-park-terrace",
+      "title": "The Park - Terrace",
+      "zone": null,
+      "image": "the-park-terrace.jpg",
+      "vaov": 93.2,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "the-park-deck-2",
+          "pitch": -2,
+          "yaw": -144,
+          "text": "The Park"
+        },
+        {
+          "type": "scene",
+          "target": "the-park-glass-door",
+          "pitch": -2,
+          "yaw": 60,
+          "text": "The Park (continued)"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOfaSNWK7CASe/WoL0CSNJEURRlSPvHNCvcTGRlYgpVCsgbO4nP6U2CLn2mReFKn6DArMs//2Q=="
+    },
+    {
+      "key": "the-park-glass-door",
+      "title": "The Park - Restaurant Door",
+      "zone": null,
+      "image": "the-park-glass-door.jpg",
+      "vaov": 84.7,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "the-park-terrace",
+          "pitch": -2,
+          "yaw": -144,
+          "text": "The Park"
+        },
+        {
+          "type": "scene",
+          "target": "restaurant",
+          "pitch": -2,
+          "yaw": 50,
+          "text": "Restaurant"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AMAOZCqW7OGYcru71BVmWI5JTH5m3ZGvDnjn8qRWpPaXarKzuAW2kZIzzSAkknjaVuO/Yn0oWwmtT//Z"
+    },
+    {
+      "key": "garden",
+      "title": "Garden Bar (Two Mile Spring)",
+      "zone": "Zone 06",
+      "image": "garden.jpg",
+      "vaov": 83.8,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "garden-2",
+          "pitch": 4,
+          "yaw": -100,
+          "text": "Garden Bar (more seating)"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAcAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOXS4ZSRk8mpsVc0oykAhuJF3LyBxyD60gGXV7DdnhCMZJ+lMCkJdvyow2jplaAP/9k="
+    },
+    {
+      "key": "garden-2",
+      "title": "Garden Bar - More Seating",
+      "zone": "Zone 06",
+      "image": "garden-2.jpg",
+      "vaov": 83.4,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "garden",
+          "pitch": -2,
+          "yaw": 80,
+          "text": "Garden Bar"
+        },
+        {
+          "type": "scene",
+          "target": "garden-stairs",
+          "pitch": 6,
+          "yaw": -60,
+          "text": "Stairs up to The Park"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOYXHlmRlU7CMjHXP/6qQyLejPkR7fYGgDW+3QyWphMPIPUipAfOrWsnljYeAeFpFH//2Q=="
+    },
+    {
+      "key": "garden-stairs",
+      "title": "Garden Bar - Stairs Up",
+      "zone": "Zone 06",
+      "image": "garden-stairs.jpg",
+      "vaov": 83.4,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "garden-2",
+          "pitch": -2,
+          "yaw": 120,
+          "text": "Garden Bar"
+        },
+        {
+          "type": "scene",
+          "target": "garden-deck-top",
+          "pitch": 10,
+          "yaw": -40,
+          "text": "The Park (upstairs)"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOcjlETkquR3BHWpKJLi+ZpfMVQg2gbV6UrBsTJHvtDdOqMquMrjrTAWXVlYjEPAGOtFhH//2Q=="
+    },
+    {
+      "key": "garden-deck-top",
+      "title": "The Park - Above Garden Bar",
+      "zone": null,
+      "image": "garden-deck-top.jpg",
+      "vaov": 83.3,
+      "northOffset": 0,
+      "capacity": null,
+      "blurb": "",
+      "hotspots": [
+        {
+          "type": "scene",
+          "target": "garden-stairs",
+          "pitch": -8,
+          "yaw": 140,
+          "text": "Garden Bar (downstairs)"
+        },
+        {
+          "type": "scene",
+          "target": "the-park-junction",
+          "pitch": -2,
+          "yaw": -50,
+          "text": "The Park"
+        }
+      ],
+      "preview": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEABQODxIPDRQSEBIXFRQYHjIhHhwcHj0sLiQySUBMS0dARkVQWnNiUFVtVkVGZIhlbXd7gYKBTmCNl4x9lnN+gXwBFRcXHhoeOyEhO3xTRlN8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fHx8fP/AABEIAAYAHAMBEQACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/AOebBjclVJPfHvUjIll65z1HSgCUXZgwyZLdDnpRa49i7Bre2PDR5Oc9/wDGlYLn/9k="
     }
   ]
 }

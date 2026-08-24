@@ -265,6 +265,17 @@
   flex-wrap: wrap;
 }
 
+.editor-facts-toolbar {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.editor-facts-toolbar .editor-input {
+  flex: 1;
+  min-width: 140px;
+}
+
 .editor-title-input {
   flex: 1;
   min-width: 200px;

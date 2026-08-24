@@ -55,6 +55,13 @@
         <input id="replace-photo-input" type="file" accept="image/*" hidden>
       </div>
 
+      <div class="editor-facts-toolbar">
+        <input id="scene-zone-input" class="editor-input" type="text" placeholder="Zone (e.g. Zone 03) - optional">
+        <input id="scene-seated-input" class="editor-input" type="number" min="0" placeholder="Seated capacity">
+        <input id="scene-cocktail-input" class="editor-input" type="number" min="0" placeholder="Cocktail capacity">
+      </div>
+      <textarea id="scene-blurb-input" class="editor-input" rows="2" placeholder="What's this space good for? Shown in the tour's space-facts panel."></textarea>
+
       <p class="editor-hint">Click anywhere on the photo to add a waypoint there. Drag to look around like normal.</p>
 
       <div id="editor-panorama" class="editor-panorama"></div>

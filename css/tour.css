@@ -27,24 +27,33 @@ html, body {
   touch-action: none;
 }
 
-/* Pannellum draws its own title box; this just nudges it clear of the iOS
-   notch / status bar and matches the venue's look a little more closely. */
-.pnlm-title-box {
-  top: env(safe-area-inset-top, 0px) !important;
-  margin-top: 10px;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 18px !important;
-  letter-spacing: 0.02em;
+/* Pannellum's own title box is redundant now - the persistent header bar
+   (#tour-header) shows the room name instead, and never disappears on
+   scene change the way Pannellum's own title box briefly does. */
+.pnlm-title-box,
+.pnlm-panorama-info {
+  display: none !important;
 }
 
 .pnlm-about-msg {
   display: none !important;
 }
 
-/* Keep zoom/fullscreen controls clear of the iOS home-indicator area */
+/* Push zoom/fullscreen controls below the persistent header, and clear of
+   the iOS home-indicator area at the bottom. */
 .pnlm-controls-container {
-  bottom: calc(10px + env(safe-area-inset-bottom, 0px)) !important;
+  top: calc(64px + env(safe-area-inset-top, 0px)) !important;
+  bottom: auto !important;
 }
+
+/* Compass, if ever re-enabled, needs to clear the gallery strip */
+.pnlm-compass {
+  bottom: calc(96px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Pannellum's own orientation (gyroscope) toggle button - leave visible,
+   it already defaults off (orientationOnByDefault is never set to true)
+   and only appears on devices that actually support it. */
 
 /* Hotspot markers */
 .tour-hotspot {
@@ -195,5 +204,308 @@ html, body {
   }
   #tour-loading .tour-loading__brand {
     animation: none;
+  }
+}
+
+/* ==========================================================================
+   Persistent header - zone label + CTA. Never disappears on scene change.
+   ========================================================================== */
+
+.tour-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 15;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0));
+  font-family: Helvetica, Arial, sans-serif;
+  pointer-events: none; /* only the interactive children opt back in below */
+}
+
+.tour-header__room {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  color: #fff;
+}
+
+.tour-header__title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(15px, 4vw, 19px);
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.tour-header__zone {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bhh-cream);
+  opacity: 0.9;
+}
+
+.tour-header__actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  pointer-events: auto;
+}
+
+.tour-header__btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(20, 20, 20, 0.6);
+  color: #fff;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 13px;
+  cursor: pointer;
+  flex: none;
+}
+
+.tour-header__btn:hover {
+  background: rgba(20, 20, 20, 0.85);
+}
+
+.tour-header__cta {
+  display: inline-block;
+  white-space: nowrap;
+  padding: 8px 14px;
+  border-radius: 20px;
+  background: var(--bhh-cream);
+  color: var(--bhh-green-darkest);
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.tour-header__cta:hover {
+  background: #fff;
+}
+
+/* Embed mode (?embed=1) - strip the chrome for iframe use */
+body.is-embed .tour-header,
+body.is-embed #gallery-strip,
+body.is-embed #tour-hint {
+  display: none !important;
+}
+
+/* ==========================================================================
+   First-visit hint
+   ========================================================================== */
+
+.tour-hint {
+  position: fixed;
+  left: 50%;
+  bottom: calc(100px + env(safe-area-inset-bottom, 0px));
+  transform: translate(-50%, 8px);
+  z-index: 16;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 24px;
+  background: rgba(20, 20, 20, 0.82);
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.tour-hint.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.tour-hint.is-hidden {
+  opacity: 0 !important;
+  transform: translate(-50%, 8px) !important;
+}
+
+.tour-hint__icon {
+  font-size: 15px;
+  color: var(--bhh-cream);
+}
+
+.tour-hint__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   Side panels (space facts / map) - simple slide-up sheets
+   ========================================================================== */
+
+.side-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.side-panel__card {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  padding: 24px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #222;
+}
+
+.side-panel__card h2 {
+  margin: 0 0 4px;
+  font-family: Georgia, 'Times New Roman', serif;
+  color: var(--bhh-green-darkest);
+}
+
+.side-panel__close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: #f0f0f0;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.side-panel__zone {
+  margin: 0 0 12px;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bhh-green);
+  font-weight: bold;
+}
+
+.side-panel__capacity {
+  display: inline-block;
+  margin: 0 0 12px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: var(--bhh-green-darkest);
+  color: var(--bhh-cream);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.side-panel__hint {
+  font-size: 13px;
+  color: #777;
+  margin-top: 0;
+}
+
+/* ==========================================================================
+   Mini map - schematic diagram, not a scaled floor plan (see README)
+   ========================================================================== */
+
+.map-diagram {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #f4f4f2;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.map-pin {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  margin: -7px 0 0 -7px;
+  border-radius: 50%;
+  background: var(--bhh-green);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  padding: 0;
+}
+
+.map-pin--current {
+  background: var(--bhh-cream);
+  border-color: var(--bhh-green-darkest);
+  width: 18px;
+  height: 18px;
+  margin: -9px 0 0 -9px;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Gallery thumbnail strip
+   ========================================================================== */
+
+.gallery-strip {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 14;
+  display: flex;
+  gap: 6px;
+  padding: 8px calc(8px + env(safe-area-inset-left, 0px)) calc(8px + env(safe-area-inset-bottom, 0px));
+  overflow-x: auto;
+  background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.55));
+  -webkit-overflow-scrolling: touch;
+}
+
+.gallery-thumb {
+  flex: none;
+  width: 56px;
+  height: 42px;
+  border-radius: 5px;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  background-color: #333;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  padding: 0;
+}
+
+.gallery-thumb.is-current {
+  border-color: var(--bhh-cream);
+}
+
+/* ==========================================================================
+   Accessible no-JS fallback
+   ========================================================================== */
+
+.tour-noscript {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #222;
+  line-height: 1.5;
+}
+
+/* Reduced motion: no hint slide-in, no gallery smooth-scroll (handled in JS) */
+@media (prefers-reduced-motion: reduce) {
+  .tour-hint {
+    transition: none;
   }
 }
