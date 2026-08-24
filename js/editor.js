@@ -132,11 +132,21 @@
       el.unsupported.hidden = false;
       return;
     }
-    window.showDirectoryPicker().then(function (handle) {
+    // Request readwrite up front - showDirectoryPicker() defaults to
+    // read-only, and this editor needs to write data/tour-scenes.json and
+    // img/scenes/ files. Asking now means Chrome's own folder-access
+    // prompt covers both read and write in one go, rather than silently
+    // failing (or prompting unexpectedly) the first time Save is clicked.
+    window.showDirectoryPicker({ mode: 'readwrite' }).then(function (handle) {
       dirHandle = handle;
-      return readJsonFile(dirHandle, DATA_PATH).catch(function () {
-        // No existing data file yet - start from an empty tour rather than fail.
-        return { startScene: null, scenes: [] };
+      return readJsonFile(dirHandle, DATA_PATH).catch(function (err) {
+        // Only a genuinely missing file is the "brand new tour" case.
+        // Anything else (bad permissions, malformed JSON, ...) needs to
+        // surface, not silently present as an empty tour.
+        if (err && (err.name === 'NotFoundError' || err.name === 'TypeMismatchError')) {
+          return { startScene: null, scenes: [] };
+        }
+        throw err;
       });
     }).then(function (data) {
       tourData = data;
