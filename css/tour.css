@@ -360,6 +360,17 @@ body.is-embed #tour-hint {
   background: rgba(0, 0, 0, 0.4);
 }
 
+/* The browser's own [hidden] { display: none } rule and this class's
+   `display: flex` have equal CSS specificity, so whichever is declared
+   later wins - without this, .side-panel's own `display: flex` silently
+   overrides `hidden`, meaning `el.mapPanel.hidden = true` (and the same
+   for the facts panel) has zero visual effect: the close button "works"
+   (the attribute is set) but the full-screen overlay never actually goes
+   away. Real bug, found via a real report of Map not closing. */
+.side-panel[hidden] {
+  display: none;
+}
+
 .side-panel__card {
   position: relative;
   width: 100%;
