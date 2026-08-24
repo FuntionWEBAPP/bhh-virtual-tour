@@ -1,0 +1,128 @@
+{
+  "startScene": "front-of-pub",
+  "scenes": [
+    {
+      "key": "front-of-pub",
+      "title": "Front of Pub",
+      "image": "front-of-pub.jpg",
+      "vaov": 93.9,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "side-bar", "pitch": -2, "yaw": -162, "text": "Side Bar" },
+        { "type": "scene", "target": "the-park-junction", "pitch": -3, "yaw": 20, "text": "The Park" },
+        { "type": "info", "pitch": 6, "yaw": -90, "text": "Welcome to the Broken Hill Hotel" }
+      ]
+    },
+    {
+      "key": "side-bar",
+      "title": "Side Bar",
+      "image": "side-bar.jpg",
+      "vaov": 83.3,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "front-of-pub", "pitch": -2, "yaw": 54, "text": "Front of Pub" },
+        { "type": "scene", "target": "back-bar", "pitch": -2, "yaw": -150, "text": "Back Bar" }
+      ]
+    },
+    {
+      "key": "the-park-junction",
+      "title": "The Park",
+      "image": "the-park-junction.jpg",
+      "vaov": 83.5,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "front-of-pub", "pitch": -2, "yaw": -144, "text": "Front of Pub" },
+        { "type": "scene", "target": "garden", "pitch": -6, "yaw": 130, "text": "Garden Bar (downstairs)" },
+        { "type": "scene", "target": "the-park-terrace", "pitch": -2, "yaw": 20, "text": "The Park (continued)" }
+      ]
+    },
+    {
+      "key": "garden",
+      "title": "Garden Bar (Two Mile Spring)",
+      "image": "garden.jpg",
+      "vaov": 83.8,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "the-park-junction", "pitch": 8, "yaw": -100, "text": "The Park (upstairs)" }
+      ]
+    },
+    {
+      "key": "the-park-terrace",
+      "title": "The Park - Terrace",
+      "image": "the-park-terrace.jpg",
+      "vaov": 93.2,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "the-park-junction", "pitch": -2, "yaw": -144, "text": "The Park" },
+        { "type": "scene", "target": "the-park-glass-door", "pitch": -2, "yaw": 60, "text": "The Park (continued)" }
+      ]
+    },
+    {
+      "key": "the-park-glass-door",
+      "title": "The Park - Restaurant Door",
+      "image": "the-park-glass-door.jpg",
+      "vaov": 84.7,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "the-park-terrace", "pitch": -2, "yaw": -144, "text": "The Park" },
+        { "type": "scene", "target": "restaurant", "pitch": -2, "yaw": 50, "text": "Restaurant" }
+      ]
+    },
+    {
+      "key": "restaurant",
+      "title": "Restaurant",
+      "image": "restaurant.jpg",
+      "vaov": 82.6,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "the-park-glass-door", "pitch": -2, "yaw": 80, "text": "The Park" },
+        { "type": "scene", "target": "hallway-restaurant", "pitch": -2, "yaw": -170, "text": "Entrance" },
+        { "type": "info", "pitch": 5, "yaw": 0, "text": "A la carte dining, open 7 days" }
+      ]
+    },
+    {
+      "key": "hallway-restaurant",
+      "title": "Restaurant Entrance",
+      "image": "hallway-restaurant.jpg",
+      "vaov": 83.4,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "restaurant", "pitch": -2, "yaw": 30, "text": "Restaurant" },
+        { "type": "scene", "target": "rear-foyer", "pitch": -2, "yaw": -160, "text": "Entrance" }
+      ]
+    },
+    {
+      "key": "rear-foyer",
+      "title": "Rear Foyer",
+      "image": "rear-foyer.jpg",
+      "vaov": 93.7,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "hallway-restaurant", "pitch": -2, "yaw": -122, "text": "Restaurant" },
+        { "type": "scene", "target": "back-entrance", "pitch": -2, "yaw": 144, "text": "Back Bar" }
+      ]
+    },
+    {
+      "key": "back-entrance",
+      "title": "Back Bar Entrance",
+      "image": "back-entrance.jpg",
+      "vaov": 81.3,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "rear-foyer", "pitch": -2, "yaw": 150, "text": "Entrance" },
+        { "type": "scene", "target": "back-bar", "pitch": -2, "yaw": -20, "text": "Back Bar" }
+      ]
+    },
+    {
+      "key": "back-bar",
+      "title": "Back Bar",
+      "image": "back-bar.jpg",
+      "vaov": 85.6,
+      "northOffset": 0,
+      "hotspots": [
+        { "type": "scene", "target": "back-entrance", "pitch": -2, "yaw": -11, "text": "Entrance" },
+        { "type": "scene", "target": "side-bar", "pitch": -2, "yaw": 160, "text": "Side Bar" }
+      ]
+    }
+  ]
+}

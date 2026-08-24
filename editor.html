@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tour Editor - Broken Hill Hotel</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="stylesheet" href="vendor/pannellum/pannellum.css">
+<link rel="stylesheet" href="css/tour.css">
+<link rel="stylesheet" href="css/editor.css">
+</head>
+<body class="editor-body">
+
+<div id="editor-unsupported" class="editor-banner editor-banner--error" hidden>
+  This editor needs a Chromium browser (Chrome or Edge) - it uses the File
+  System Access API to save directly to your project folder. It won't work
+  in Safari or Firefox.
+</div>
+
+<div id="editor-picker" class="editor-picker">
+  <div class="editor-picker__card">
+    <h1>Broken Hill Hotel &mdash; Tour Editor</h1>
+    <p>Open your <code>bhh-virtual-tour</code> project folder to start editing.
+       Changes save straight to your real files - commit &amp; push when
+       you're happy with them to make the changes live.</p>
+    <button id="btn-open-folder" class="editor-btn editor-btn--primary">Open Tour Folder</button>
+    <p id="editor-picker-error" class="editor-picker__error" hidden></p>
+  </div>
+</div>
+
+<div id="editor-app" class="editor-app" hidden>
+
+  <header class="editor-header">
+    <h1>Tour Editor</h1>
+    <div class="editor-header__status">
+      <span id="editor-status" class="editor-status">All changes saved</span>
+      <button id="btn-save" class="editor-btn editor-btn--primary" disabled>Save All Changes</button>
+    </div>
+  </header>
+
+  <div class="editor-layout">
+
+    <aside class="editor-sidebar">
+      <button id="btn-add-room" class="editor-btn editor-btn--full">+ Add Room</button>
+      <ol id="scene-list" class="scene-list"></ol>
+    </aside>
+
+    <main class="editor-main">
+      <div class="editor-scene-toolbar">
+        <input id="scene-title-input" class="editor-input editor-title-input" type="text" placeholder="Room title">
+        <button id="btn-replace-photo" class="editor-btn">Replace Photo</button>
+        <button id="btn-set-start" class="editor-btn">Set as Start Scene</button>
+        <button id="btn-delete-scene" class="editor-btn editor-btn--danger">Delete Room</button>
+        <input id="replace-photo-input" type="file" accept="image/*" hidden>
+      </div>
+
+      <p class="editor-hint">Click anywhere on the photo to add a waypoint there. Drag to look around like normal.</p>
+
+      <div id="editor-panorama" class="editor-panorama"></div>
+
+      <div class="editor-waypoints">
+        <h2>Waypoints in this room</h2>
+        <ul id="waypoint-list" class="waypoint-list"></ul>
+        <p id="waypoint-empty" class="editor-hint" hidden>No waypoints yet - click the photo above to add one.</p>
+      </div>
+    </main>
+
+  </div>
+</div>
+
+<!-- Add/Edit Waypoint modal -->
+<div id="waypoint-modal" class="editor-modal" hidden>
+  <div class="editor-modal__card">
+    <h2 id="waypoint-modal-title">Add Waypoint</h2>
+    <div class="editor-field-group">
+      <label><input type="radio" name="waypoint-type" value="scene" checked> Link to another room</label>
+      <label><input type="radio" name="waypoint-type" value="info"> Add a comment</label>
+    </div>
+    <div id="waypoint-scene-fields">
+      <label class="editor-label" for="waypoint-target">Target room</label>
+      <select id="waypoint-target" class="editor-input"></select>
+      <label class="editor-label" for="waypoint-scene-text">Label (shown on hover)</label>
+      <input id="waypoint-scene-text" class="editor-input" type="text" placeholder="e.g. Side Bar">
+    </div>
+    <div id="waypoint-info-fields" hidden>
+      <label class="editor-label" for="waypoint-info-text">Comment text</label>
+      <textarea id="waypoint-info-text" class="editor-input" rows="3" placeholder="e.g. Seats 80, available for functions"></textarea>
+    </div>
+    <div class="editor-modal__actions">
+      <button id="btn-waypoint-delete" class="editor-btn editor-btn--danger" hidden>Delete</button>
+      <span class="editor-modal__spacer"></span>
+      <button id="btn-waypoint-cancel" class="editor-btn">Cancel</button>
+      <button id="btn-waypoint-save" class="editor-btn editor-btn--primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Room modal -->
+<div id="room-modal" class="editor-modal" hidden>
+  <div class="editor-modal__card">
+    <h2>Add Room</h2>
+    <label class="editor-label" for="room-title-input">Room title</label>
+    <input id="room-title-input" class="editor-input" type="text" placeholder="e.g. Beer Garden">
+    <label class="editor-label" for="room-photo-input">360&deg; photo</label>
+    <input id="room-photo-input" class="editor-input" type="file" accept="image/*">
+    <p class="editor-hint">Resized and compressed automatically - drop in the original straight from your phone.</p>
+    <div class="editor-modal__actions">
+      <span class="editor-modal__spacer"></span>
+      <button id="btn-room-cancel" class="editor-btn">Cancel</button>
+      <button id="btn-room-save" class="editor-btn editor-btn--primary">Add Room</button>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/pannellum/pannellum.js"></script>
+<script src="js/tour-shared.js"></script>
+<script src="js/editor.js"></script>
+</body>
+</html>

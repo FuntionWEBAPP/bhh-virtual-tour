@@ -1,85 +1,15 @@
 /*
  * Broken Hill Hotel - virtual tour viewer bootstrap.
  *
- * This file turns TOUR_SCENES / TOUR_START_SCENE (tour-config.js) into a
- * Pannellum config and starts the viewer. It should not need editing to
- * add, remove or re-point a room - do that in tour-config.js instead.
+ * Loads data/tour-scenes.json and starts the Pannellum viewer. To edit
+ * rooms/photos/waypoints, use editor.html - don't hand-edit the JSON
+ * unless you're comfortable with the schema (see TourShared for the
+ * fields it expects).
  */
 (function () {
   'use strict';
 
-  var IMAGE_BASE = 'img/scenes/';
-
-  function buildPannellumScene(sceneConfig) {
-    var hotSpots = (sceneConfig.hotspots || []).map(function (hotspot) {
-      if (hotspot.type === 'scene') {
-        return {
-          type: 'scene',
-          sceneId: hotspot.target,
-          pitch: hotspot.pitch,
-          yaw: hotspot.yaw,
-          text: hotspot.text,
-          // Pannellum only adds its own "pnlm-hotspot pnlm-sprite pnlm-scene"
-          // classes when cssClass is NOT set - setting cssClass REPLACES
-          // them rather than adding to them. Those default classes are what
-          // give the hotspot a real 26x26px clickable/tappable area; without
-          // them the element has no size at all, so it renders as basically
-          // unclickable even though our own arrow graphic (drawn via ::after)
-          // still shows up. Re-including them here alongside our own classes
-          // keeps the real click target while still letting us restyle it.
-          cssClass: 'pnlm-hotspot pnlm-sprite pnlm-scene tour-hotspot tour-hotspot--nav'
-        };
-      }
-      return {
-        type: 'info',
-        pitch: hotspot.pitch,
-        yaw: hotspot.yaw,
-        text: hotspot.text,
-        cssClass: 'pnlm-hotspot pnlm-sprite pnlm-info tour-hotspot tour-hotspot--info'
-      };
-    });
-
-    return {
-      title: sceneConfig.title,
-      type: 'equirectangular',
-      panorama: IMAGE_BASE + sceneConfig.image,
-      // Real phone-shot 360s rarely cover the full 180 degrees vertically -
-      // haov/vaov tell Pannellum exactly how much of the sphere this photo
-      // actually covers instead of assuming a full 2:1 equirectangular and
-      // stretching it. Defaults (360/180) match a full sphere for any scene
-      // that doesn't set these (e.g. a placeholder).
-      haov: sceneConfig.haov || 360,
-      vaov: sceneConfig.vaov || 180,
-      vOffset: sceneConfig.vOffset || 0,
-      northOffset: sceneConfig.northOffset || 0,
-      pitch: sceneConfig.pitch || 0,
-      yaw: sceneConfig.yaw || 0,
-      hfov: 100,
-      compass: false,
-      hotSpots: hotSpots
-    };
-  }
-
-  function buildPannellumConfig() {
-    var scenes = {};
-    Object.keys(TOUR_SCENES).forEach(function (key) {
-      scenes[key] = buildPannellumScene(TOUR_SCENES[key]);
-    });
-
-    return {
-      default: {
-        firstScene: TOUR_START_SCENE,
-        sceneFadeDuration: 800,
-        autoLoad: true,
-        autoRotate: -2,
-        compass: false,
-        showZoomCtrl: true,
-        showFullscreenCtrl: true,
-        hotSpotDebug: false
-      },
-      scenes: scenes
-    };
-  }
+  var DATA_URL = 'data/tour-scenes.json';
 
   function initLoadingIndicator(viewer) {
     var indicator = document.getElementById('tour-loading');
@@ -99,8 +29,8 @@
   }
 
   // Dev helper: hold Alt and click anywhere on the panorama to log that
-  // spot's pitch/yaw to the console. Handy for placing hotspots once a real
-  // photo is loaded - copy the numbers straight into tour-config.js.
+  // spot's pitch/yaw to the console. The editor does this visually now, so
+  // this is mostly a fallback for anyone hand-editing the JSON.
   function initHotspotPicker(viewer, container) {
     container.addEventListener('click', function (event) {
       if (!event.altKey) return;
@@ -112,11 +42,21 @@
     });
   }
 
+  function showLoadError(err) {
+    var indicator = document.getElementById('tour-loading');
+    if (!indicator) return;
+    var label = indicator.querySelector('.tour-loading__label');
+    if (label) label.textContent = 'Could not load the tour - please refresh.';
+    console.error(err);
+  }
+
   function start() {
     var container = document.getElementById('panorama');
-    var viewer = pannellum.viewer('panorama', buildPannellumConfig());
-    initLoadingIndicator(viewer);
-    initHotspotPicker(viewer, container);
+    TourShared.loadTourData(DATA_URL).then(function (tourData) {
+      var viewer = pannellum.viewer('panorama', TourShared.buildPannellumConfig(tourData));
+      initLoadingIndicator(viewer);
+      initHotspotPicker(viewer, container);
+    }).catch(showLoadError);
   }
 
   if (document.readyState === 'loading') {

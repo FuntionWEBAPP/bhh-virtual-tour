@@ -15,22 +15,45 @@ one's just a zero-dependency convenience for local preview. There's nothing
 to build; the folder is plain static files, deployable as-is to any static
 host.)
 
-## Adding or changing a room
+## Tour Editor - the normal way to make changes
 
-Edit **`js/tour-config.js` only** - that's the one file meant to be touched
-day to day. Each scene needs:
+Open **`editor.html`** in Chrome or Edge (needs the File System Access API -
+Safari/Firefox aren't supported) and click **Open Tour Folder**, pointing it
+at this project's root folder. From there:
 
-- `title` - shown in the on-screen title bar
-- `image` - filename of a photo in `img/scenes/`
-- `vaov` - vertical angle of view in degrees. A phone-shot 360 photo almost
-  never covers the full 180 degrees vertically (ours are ~82-94 degrees) -
-  this tells Pannellum exactly how much of the sphere the photo covers so it
-  doesn't get stretched. Compute it as `360 * photo_height / photo_width`.
-- `hotspots` - clickable markers: `type: "scene"` walks to another room
-  (`target` = that scene's key), `type: "info"` just shows a text bubble
+- **+ Add Room** - give it a title and pick a photo straight from your
+  phone/camera roll; it's resized and compressed automatically, and its
+  vertical angle of view is computed from the photo's own dimensions - no
+  manual math.
+- **Click anywhere on the photo** to drop a waypoint at that exact spot -
+  either a link to another room (pick it from a list) or a text comment.
+  The pitch/yaw are captured from where you actually clicked, not
+  estimated from a static image, so placement is accurate the first time.
+- Click an **existing waypoint arrow** to edit or delete it.
+- **▲ / ▼** on a room in the sidebar to reorder it; **Set as Start Scene**
+  to change which room the tour opens on; **Replace Photo** to swap a
+  room's photo without rebuilding its waypoints; **Delete Room** removes a
+  room and cleans up any other room's waypoints that pointed at it.
+- **Save All Changes** writes straight to `data/tour-scenes.json` and
+  `img/scenes/` in your real project folder - nothing is uploaded anywhere,
+  nothing leaves your computer. Commit and push those files afterward to
+  make the changes live (the editor doesn't do that part for you).
 
-Nothing in `tour.js` or `index.html` needs to change for a normal room
-add/remove/rename.
+The public tour (`index.html`) reads whatever's in `data/tour-scenes.json`
+at load time - the editor and the live site are always looking at the same
+data, there's no separate publish step beyond your normal git push.
+
+### Hand-editing the data instead
+
+`data/tour-scenes.json` is plain JSON if you'd rather edit it directly -
+same fields the editor writes: `title`, `image` (filename in `img/scenes/`),
+`vaov` (vertical angle of view in degrees - a phone-shot 360 rarely covers
+the full 180, compute this as `360 * photo_height / photo_width` if you add
+a photo outside the editor), and `hotspots` (`type: "scene"` with a
+`target` room key, or `type: "info"` for a comment - both need `pitch`/
+`yaw`). Holding **Alt and clicking** anywhere in the *public* tour
+(`index.html`) still logs pitch/yaw to the console the same way, for this
+exact reason.
 
 ## Room map
 
@@ -71,19 +94,20 @@ Several areas had multiple shots taken (Back Bar, Restaurant, the various
 Beer Garden angles); one was picked per scene - the rest are sitting unused
 in that folder if you ever want a second angle as its own extra stop.
 
-**Hotspot placement is still a first pass**: positions were estimated by
-matching a doorway/staircase's pixel position in the source photo to a
-compass angle, not measured live in the viewer - expect some arrows to
-need a nudge once you can actually walk through it on a phone. Use the
-Alt+click trick below for any that are off. That's expected iteration, not
-a bug - the graph shape (which room leads to which) is the part that took
-the real correction; exact arrow placement is always a second pass.
+**Hotspot placement was a first pass** when this graph was built (estimated
+by matching a doorway/staircase's pixel position in the source photo to a
+compass angle, not measured live) - use the Tour Editor above to nudge
+anything that's not sitting quite right; clicking to place a waypoint there
+is exact by construction, no more estimating.
 
-## Placing hotspots accurately
-
-Once a real photo is loaded, **hold Alt and click** anywhere in the tour -
-the pitch/yaw for that exact spot is logged to the browser console. Copy
-those numbers into the hotspot's `pitch`/`yaw` in `tour-config.js`.
+**"I want it to feel like walking, not clicking"** - real feedback, and the
+honest answer: a photo-sphere viewer can't blend two photos taken at
+different real-world spots into smooth motion (crossfading them just looks
+like a double-exposure, not movement) - that's a hard limit of static
+360 photos, not a setting to tune. The path that's actually achievable for
+free: more photos, spaced closer together, so each click is a short hop
+instead of a big jump. The editor above is built for exactly that - add as
+many rooms as you shoot, in whatever order, without touching code.
 
 ## Swapping in the real logo
 
@@ -117,7 +141,12 @@ updated, everything that uses them (loading screen, hotspot markers) follows:
 - [x] Real photos in place of placeholders (11 rooms, walkable graph layout,
       corrected against real landmarks after the first pass mislabeled two
       terraces as separate rooms)
-- [ ] Hotspot positions fine-tuned against the live viewer (first pass only)
+- [x] Hotspots actually clickable (real bug: a custom `cssClass` was
+      silently replacing Pannellum's own click-target sizing classes -
+      every arrow had ~zero clickable area from the very first version)
+- [x] Tour Editor (`editor.html`) - add/replace photos, click-to-place
+      waypoints, reorder rooms, all saved straight to real project files
+      via the File System Access API, no backend
 - [ ] Real logo (currently a text wordmark)
 - [ ] Embedded into the main site
 
