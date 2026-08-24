@@ -35,6 +35,14 @@
       title: sceneConfig.title,
       type: 'equirectangular',
       panorama: IMAGE_BASE + sceneConfig.image,
+      // Real phone-shot 360s rarely cover the full 180 degrees vertically -
+      // haov/vaov tell Pannellum exactly how much of the sphere this photo
+      // actually covers instead of assuming a full 2:1 equirectangular and
+      // stretching it. Defaults (360/180) match a full sphere for any scene
+      // that doesn't set these (e.g. a placeholder).
+      haov: sceneConfig.haov || 360,
+      vaov: sceneConfig.vaov || 180,
+      vOffset: sceneConfig.vOffset || 0,
       northOffset: sceneConfig.northOffset || 0,
       pitch: sceneConfig.pitch || 0,
       yaw: sceneConfig.yaw || 0,
