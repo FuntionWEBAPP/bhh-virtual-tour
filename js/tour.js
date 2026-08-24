@@ -19,7 +19,15 @@
           pitch: hotspot.pitch,
           yaw: hotspot.yaw,
           text: hotspot.text,
-          cssClass: 'tour-hotspot tour-hotspot--nav'
+          // Pannellum only adds its own "pnlm-hotspot pnlm-sprite pnlm-scene"
+          // classes when cssClass is NOT set - setting cssClass REPLACES
+          // them rather than adding to them. Those default classes are what
+          // give the hotspot a real 26x26px clickable/tappable area; without
+          // them the element has no size at all, so it renders as basically
+          // unclickable even though our own arrow graphic (drawn via ::after)
+          // still shows up. Re-including them here alongside our own classes
+          // keeps the real click target while still letting us restyle it.
+          cssClass: 'pnlm-hotspot pnlm-sprite pnlm-scene tour-hotspot tour-hotspot--nav'
         };
       }
       return {
@@ -27,7 +35,7 @@
         pitch: hotspot.pitch,
         yaw: hotspot.yaw,
         text: hotspot.text,
-        cssClass: 'tour-hotspot tour-hotspot--info'
+        cssClass: 'pnlm-hotspot pnlm-sprite pnlm-info tour-hotspot tour-hotspot--info'
       };
     });
 

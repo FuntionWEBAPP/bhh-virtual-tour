@@ -51,7 +51,7 @@ html, body {
   cursor: pointer;
 }
 
-.tour-hotspot--nav .pnlm-sprite {
+.tour-hotspot--nav {
   background: rgba(20, 20, 20, 0.75);
   border: 2px solid var(--bhh-cream);
   border-radius: 50%;
@@ -72,7 +72,7 @@ html, body {
   pointer-events: none;
 }
 
-.tour-hotspot--info .pnlm-sprite {
+.tour-hotspot--info {
   background: rgba(20, 20, 20, 0.75);
   border: 2px solid #ffffff;
   border-radius: 50%;
