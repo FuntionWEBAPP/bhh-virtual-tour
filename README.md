@@ -30,8 +30,17 @@ Safari/Firefox aren't supported) and click **Open Tour Folder**, pointing it
 at this project's root folder - it'll ask for read/write access to that
 folder up front. From there:
 
-- **+ Add Room** - title + a photo straight from your camera roll; resized,
-  compressed, and its vertical angle of view computed automatically.
+- **+ Add Photos (bulk)** - pick or drag in any number of photos at once
+  (drop them anywhere on the sidebar). One room per photo, titled from the
+  filename ("Beer garden 4.jpg" becomes "Beer Garden 4"), sorted
+  numerically so 2 lands before 10. Rename afterwards by selecting each
+  room and editing its title. Photos are processed strictly one at a time
+  with a progress bar - decoding 40 very large images at once is a real way
+  to have the browser tab killed - and one unreadable photo is reported at
+  the end rather than abandoning the rest of the batch.
+- **+ Add One Room** - the single-photo version, when you want to type the
+  title yourself. Resized, compressed, and its vertical angle of view
+  computed automatically (same as bulk).
 - **Click anywhere on the photo** to drop a waypoint exactly there - link to
   another room, or a text comment. Pitch/yaw come from where you actually
   clicked, not an estimate.
@@ -41,9 +50,14 @@ folder up front. From there:
   actually seat, what's it good for" question every function enquiry asks).
   Leave any of them blank if you don't have the number yet - the panel just
   omits what's missing rather than showing a blank.
-- **▲ / ▼** to reorder a room; **Set as Start Scene**; **Replace Photo**
-  (keeps existing waypoints, recomputes angle-of-view); **Delete Room**
-  (cleans up any other room's waypoints that pointed at it).
+- **Reorder** by dragging a room up or down the sidebar list (grab the ⠿
+  handle, or the row itself); the ▲/▼ buttons still work too and are kept
+  deliberately - they're keyboard-reachable and precise where drag isn't.
+  Note this order only controls the tour's bottom thumbnail strip - how
+  visitors actually *walk* through is entirely the waypoints.
+- **Set as Start Scene**; **Replace Photo** (keeps existing waypoints,
+  recomputes angle-of-view); **Delete Room** (cleans up any other room's
+  waypoints that pointed at it).
 - **Save All Changes** writes straight to `data/tour-scenes.json` and
   `img/scenes/` - nothing uploaded, nothing leaves your computer. Commit and
   push afterward to make it live; the editor doesn't do that part.

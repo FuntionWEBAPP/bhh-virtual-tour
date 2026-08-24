@@ -41,8 +41,15 @@
 
   <div class="editor-layout">
 
-    <aside class="editor-sidebar">
-      <button id="btn-add-room" class="editor-btn editor-btn--full">+ Add Room</button>
+    <aside id="editor-sidebar" class="editor-sidebar">
+      <button id="btn-add-photos" class="editor-btn editor-btn--full editor-btn--primary">+ Add Photos (bulk)</button>
+      <button id="btn-add-room" class="editor-btn editor-btn--full">+ Add One Room</button>
+      <input id="bulk-photo-input" type="file" accept="image/*" multiple hidden>
+      <p class="editor-hint editor-hint--drop">Or drop photos anywhere on this list. One room per photo, named from the filename.</p>
+      <div id="bulk-progress" class="bulk-progress" hidden>
+        <div class="bulk-progress__bar"><div id="bulk-progress-fill" class="bulk-progress__fill"></div></div>
+        <p id="bulk-progress-label" class="bulk-progress__label"></p>
+      </div>
       <ol id="scene-list" class="scene-list"></ol>
     </aside>
 

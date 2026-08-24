@@ -24,6 +24,7 @@
   var viewer = null;
   var dirty = false;
   var pendingWaypoint = null; // { pitch, yaw, editIndex } while the modal is open
+  var dragFromIndex = null;   // sidebar drag-to-reorder: row being dragged
 
   var el = {}; // populated in init() with all the DOM refs we touch a lot
 
@@ -182,6 +183,14 @@
     tourData.scenes.forEach(function (scene, index) {
       var li = document.createElement('li');
       li.className = 'scene-list-item' + (index === selectedIndex ? ' is-selected' : '');
+      li.draggable = true;
+      li.dataset.index = index;
+
+      var grip = document.createElement('span');
+      grip.className = 'scene-list-item__grip';
+      grip.textContent = '⠿';
+      grip.title = 'Drag to reorder';
+      li.appendChild(grip);
 
       var title = document.createElement('span');
       title.className = 'scene-list-item__title';
@@ -195,6 +204,8 @@
         li.appendChild(badge);
       }
 
+      // The up/down buttons are kept alongside drag-and-drop on purpose:
+      // they're keyboard-reachable and precise, where HTML5 drag is neither.
       var reorder = document.createElement('span');
       reorder.className = 'scene-list-item__reorder';
       var up = document.createElement('button');
@@ -213,9 +224,75 @@
       reorder.appendChild(down);
       li.appendChild(reorder);
 
+      li.addEventListener('dragstart', function (e) {
+        dragFromIndex = index;
+        li.classList.add('is-dragging');
+        e.dataTransfer.effectAllowed = 'move';
+        // Firefox refuses to start a drag at all unless some data is set.
+        e.dataTransfer.setData('text/plain', String(index));
+      });
+      li.addEventListener('dragend', function () {
+        dragFromIndex = null;
+        clearDropMarkers();
+        li.classList.remove('is-dragging');
+      });
+      li.addEventListener('dragover', function (e) {
+        if (dragFromIndex === null) return;
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        // Insert above or below this row depending on which half the
+        // pointer is over - matches how every other list-reorder UI behaves.
+        var rect = li.getBoundingClientRect();
+        var below = (e.clientY - rect.top) > rect.height / 2;
+        clearDropMarkers();
+        li.classList.add(below ? 'is-drop-below' : 'is-drop-above');
+      });
+      li.addEventListener('drop', function (e) {
+        if (dragFromIndex === null) return;
+        e.preventDefault();
+        e.stopPropagation();
+        var rect = li.getBoundingClientRect();
+        var below = (e.clientY - rect.top) > rect.height / 2;
+        var target = index + (below ? 1 : 0);
+        clearDropMarkers();
+        reorderScene(dragFromIndex, target);
+      });
+
       li.addEventListener('click', function () { selectScene(index); });
       el.sceneList.appendChild(li);
     });
+  }
+
+  function clearDropMarkers() {
+    var marked = el.sceneList.querySelectorAll('.is-drop-above, .is-drop-below');
+    Array.prototype.forEach.call(marked, function (n) {
+      n.classList.remove('is-drop-above', 'is-drop-below');
+    });
+  }
+
+  // Move the scene at `from` so it sits at `to` in the list. `to` is the
+  // index the item should END UP at, expressed against the list BEFORE the
+  // move - so dropping below row 3 gives to=4, which after removing the
+  // dragged row from earlier in the list becomes 3. That adjustment is the
+  // easy thing to get wrong here.
+  function reorderScene(from, to) {
+    if (from === to || from === to - 1) return; // dropped where it already is
+    var arr = tourData.scenes;
+    var moved = arr[from];
+    var selectedKey = selectedIndex >= 0 ? arr[selectedIndex].key : null;
+    arr.splice(from, 1);
+    if (from < to) to--;
+    arr.splice(to, 0, moved);
+    if (selectedKey) selectedIndex = indexOfKey(selectedKey);
+    renderSceneList();
+    markDirty();
+  }
+
+  function indexOfKey(key) {
+    for (var i = 0; i < tourData.scenes.length; i++) {
+      if (tourData.scenes[i].key === key) return i;
+    }
+    return -1;
   }
 
   function moveScene(index, delta) {
@@ -425,18 +502,12 @@
     el.roomModal.hidden = true;
   }
 
-  function saveNewRoom() {
-    var title = el.roomTitleInput.value.trim();
-    var file = el.roomPhotoInput.files[0];
-    if (!title || !file) {
-      window.alert('A title and a photo are both required.');
-      return;
-    }
-    el.btnRoomSave.disabled = true;
-    el.btnRoomSave.textContent = 'Adding…';
-
+  // Shared by both the single-room modal and bulk import, so the two can't
+  // drift in what a newly-created scene looks like. Resolves to the new
+  // scene; rejects if the photo can't be read/written.
+  function addSceneFromFile(file, title) {
     var key = uniqueKey(slugify(title));
-    resizeImageToBlob(file).then(function (result) {
+    return resizeImageToBlob(file).then(function (result) {
       var filename = key + '.jpg';
       return writeFile(dirHandle, IMAGE_DIR_PATH.concat(filename), result.blob).then(function () {
         var scene = {
@@ -453,17 +524,122 @@
         };
         tourData.scenes.push(scene);
         if (!tourData.startScene) tourData.startScene = key;
-        renderSceneList();
-        selectScene(tourData.scenes.length - 1);
-        markDirty();
-        closeRoomModal();
+        return scene;
       });
+    });
+  }
+
+  function saveNewRoom() {
+    var title = el.roomTitleInput.value.trim();
+    var file = el.roomPhotoInput.files[0];
+    if (!title || !file) {
+      window.alert('A title and a photo are both required.');
+      return;
+    }
+    el.btnRoomSave.disabled = true;
+    el.btnRoomSave.textContent = 'Adding…';
+
+    addSceneFromFile(file, title).then(function () {
+      renderSceneList();
+      selectScene(tourData.scenes.length - 1);
+      markDirty();
+      closeRoomModal();
     }).catch(function (err) {
       window.alert('Could not add that room: ' + err.message);
       console.error(err);
     }).then(function () {
       el.btnRoomSave.disabled = false;
       el.btnRoomSave.textContent = 'Add Room';
+    });
+  }
+
+  // ---------- Bulk import ----------
+
+  // "Beer garden 4.jpg" -> "Beer Garden 4". Deliberately keeps trailing
+  // numbers (they're usually meaningful - shot order within a room) and
+  // just tidies separators and capitalisation.
+  function titleFromFilename(name) {
+    var base = name.replace(/\.[^.]+$/, '');            // drop extension
+    base = base.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ').trim();
+    if (!base) return 'Room';
+    return base.replace(/\b[a-z]/g, function (c) { return c.toUpperCase(); });
+  }
+
+  function setBulkProgress(done, total, label) {
+    el.bulkProgress.hidden = false;
+    var pct = total ? Math.round((done / total) * 100) : 0;
+    el.bulkProgressFill.style.width = pct + '%';
+    el.bulkProgressLabel.textContent = label;
+  }
+
+  // Photos are processed strictly one at a time, not in parallel: each one
+  // decodes a very large image into a canvas, and firing 40 of those at
+  // once is a real way to exhaust memory and have the tab killed. Slower,
+  // but it finishes.
+  function importPhotos(files) {
+    var images = Array.prototype.filter.call(files, function (f) {
+      return /^image\//.test(f.type);
+    });
+    if (!images.length) {
+      window.alert('No image files found in that drop.');
+      return;
+    }
+    // Sort by filename so the resulting room order matches how they appear
+    // in the folder, rather than whatever order the OS handed them over in.
+    images.sort(function (a, b) {
+      return a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' });
+    });
+
+    el.btnAddPhotos.disabled = true;
+    el.btnAddRoom.disabled = true;
+    var failures = [];
+    var firstNewIndex = tourData.scenes.length;
+
+    var chain = Promise.resolve();
+    images.forEach(function (file, i) {
+      chain = chain.then(function () {
+        setBulkProgress(i, images.length, 'Adding ' + (i + 1) + ' of ' + images.length + ': ' + file.name);
+        return addSceneFromFile(file, titleFromFilename(file.name)).catch(function (err) {
+          // One unreadable photo shouldn't abandon the other 39.
+          failures.push(file.name + ' (' + err.message + ')');
+          console.error(file.name, err);
+        });
+      });
+    });
+
+    chain.then(function () {
+      setBulkProgress(images.length, images.length, 'Done');
+      renderSceneList();
+      if (tourData.scenes.length > firstNewIndex) selectScene(firstNewIndex);
+      markDirty();
+      setTimeout(function () { el.bulkProgress.hidden = true; }, 1200);
+      el.btnAddPhotos.disabled = false;
+      el.btnAddRoom.disabled = false;
+      var added = images.length - failures.length;
+      if (failures.length) {
+        window.alert('Added ' + added + ' of ' + images.length + ' photos.\n\nCouldn\'t read:\n' + failures.join('\n'));
+      }
+    });
+  }
+
+  function initBulkDropZone() {
+    var zone = el.sidebar;
+    ['dragenter', 'dragover'].forEach(function (evt) {
+      zone.addEventListener(evt, function (e) {
+        // Only react to actual files - not the sidebar's own row-reorder drag.
+        if (dragFromIndex !== null) return;
+        e.preventDefault();
+        zone.classList.add('is-drop-target');
+      });
+    });
+    ['dragleave', 'drop'].forEach(function (evt) {
+      zone.addEventListener(evt, function (e) {
+        if (evt === 'drop' && dragFromIndex === null && e.dataTransfer.files.length) {
+          e.preventDefault();
+          importPhotos(e.dataTransfer.files);
+        }
+        zone.classList.remove('is-drop-target');
+      });
     });
   }
 
@@ -580,7 +756,13 @@
       status: document.getElementById('editor-status'),
       btnSave: document.getElementById('btn-save'),
       sceneList: document.getElementById('scene-list'),
+      sidebar: document.getElementById('editor-sidebar'),
       btnAddRoom: document.getElementById('btn-add-room'),
+      btnAddPhotos: document.getElementById('btn-add-photos'),
+      bulkPhotoInput: document.getElementById('bulk-photo-input'),
+      bulkProgress: document.getElementById('bulk-progress'),
+      bulkProgressFill: document.getElementById('bulk-progress-fill'),
+      bulkProgressLabel: document.getElementById('bulk-progress-label'),
       titleInput: document.getElementById('scene-title-input'),
       zoneInput: document.getElementById('scene-zone-input'),
       seatedInput: document.getElementById('scene-seated-input'),
@@ -614,6 +796,12 @@
     el.btnOpenFolder.addEventListener('click', openFolder);
     el.btnSave.addEventListener('click', saveAll);
     el.btnAddRoom.addEventListener('click', openRoomModal);
+    el.btnAddPhotos.addEventListener('click', function () { el.bulkPhotoInput.click(); });
+    el.bulkPhotoInput.addEventListener('change', function () {
+      if (el.bulkPhotoInput.files.length) importPhotos(el.bulkPhotoInput.files);
+      el.bulkPhotoInput.value = '';
+    });
+    initBulkDropZone();
     el.titleInput.addEventListener('change', renameScene);
     el.zoneInput.addEventListener('change', updateFacts);
     el.seatedInput.addEventListener('change', updateFacts);
